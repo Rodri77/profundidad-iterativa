@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 public class IDDFS {
     private int depth;
     private Node current;
-    private List open;
-    private List closed;
-    private List children;
+    private List<Node> open;
+    private List<Node> closed;
+    private List<Node> children;
 
     public IDDFS(Node root) {
         depth = 0;
@@ -26,11 +26,11 @@ public class IDDFS {
                 open.remove(0);
                 closed.add(current);
                 if(depth <= limit) {
-                    children = (List) open.stream().filter(child -> !open.contains(child) && !closed.contains(child))
+                    children = open.stream().filter(child -> !open.contains(child) && !closed.contains(child))
                         .collect(Collectors.toList());
                     open.addAll(children);
                 }
-                current = (Node) open.get(0);
+                current = open.get(0);
             }
             depth += 1;
         }
