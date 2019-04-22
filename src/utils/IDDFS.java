@@ -26,7 +26,7 @@ public class IDDFS {
                 open.remove(0);
                 closed.add(current);
                 if(depth <= limit) {
-                    children = open.stream().filter(child -> !open.contains(child) && !closed.contains(child))
+                    children = (List<Node>) current.getChildren().stream().filter(child -> !open.contains(child) && !closed.contains(child))
                         .collect(Collectors.toList());
                     open.addAll(children);
                 }

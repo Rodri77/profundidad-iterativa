@@ -15,55 +15,37 @@ public class Node<T> {
 
     public Node(T data, Node<T> parent) {
         this.data = data;
-        this.parent = parent;
-        this.level = parent.level + 1;
+        setParent(parent);
+        level = parent.level + 1;
     }
 
     public List<Node<T>> getChildren() {
         return children;
     }
 
-    public void setParent(Node<T> parent) {
-        parent.addChild(this);
-        this.parent = parent;
+    public void addChild(Node child) {
+        child.setParent(this);
+        children.add(child);
     }
 
     public void addChild(T data) {
-        Node<T> child = new Node<T>(data);
-        child.setParent(this);
-        this.children.add(child);
-    }
-
-    public void addChild(Node<T> child) {
-        child.setParent(this);
-        this.children.add(child);
+        Node<T> newChild = new Node (data);
+        this.addChild(newChild);
     }
 
     public T getData() {
-        return this.data;
+        return data;
     }
 
     public void setData(T data) {
         this.data = data;
     }
 
-    public int getLevel() {
-        return this.level;
+    private void setParent(Node parent) {
+        this.parent = parent;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    public boolean isRoot() {
-        return (this.parent == null);
-    }
-
-    public boolean isLeaf() {
-        return this.children.size() == 0;
-    }
-
-    public void removeParent() {
-        this.parent = null;
+    public Node getParent() {
+        return parent;
     }
 }
